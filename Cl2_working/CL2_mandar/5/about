@@ -1,0 +1,32 @@
+/*shared memory concept
+producer-consumer using shm functions
+header file: shm_com.h
+consumer: shm1.c
+producer: shm2.c
+
+[oslab@ws203-016 producer_consumer]$ ./shm1 &
+[1] 25743
+[oslab@ws203-016 producer_consumer]$ Memory attached at B77C5000
+./shm2
+Memory attached at B78AA000
+Enter some text: hwkejf
+You wrotte: hwkejf
+Waiting for client...
+hellWaiting for client...
+Enter some text: o
+You wrotte: hello
+Waiting for client...
+Waiting for client...
+Waiting for client...
+Enter some text: laksj
+You wrotte: laksj
+Waiting for client...
+Waiting for client...
+Enter some text: end
+You wrotte: end
+[oslab@ws203-016 producer_consumer]$ 
+
+
+*/
+
+

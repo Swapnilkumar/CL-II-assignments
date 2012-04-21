@@ -1,0 +1,28 @@
+[oslab@ws203-016 6]$ ls
+a.out  http.c  index.html  one.html
+[oslab@ws203-016 6]$ ./a.out 
+Server started at port no. 10000 with root directory as /home/oslab/6
+GET / HTTP/1.1
+Host: localhost:10000
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.10) Gecko/20101005 Fedora/3.6.10-1.fc14 Firefox/3.6.10
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip,deflate
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Keep-Alive: 115
+Connection: keep-alive
+
+file: /home/oslab/6/index.html
+GET /favicon.ico HTTP/1.1
+Host: localhost:10000
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.10) Gecko/20101005 Fedora/3.6.10-1.fc14 Firefox/3.6.10
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip,deflate
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Keep-Alive: 115
+Connection: keep-alive
+
+file: /home/oslab/6/favicon.ico
+
+

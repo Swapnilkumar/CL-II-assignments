@@ -1,0 +1,37 @@
+
+#include "avg1.h"
+#include <stdlib.h>
+
+void squareprog_1( char* host, int argc, char *argv[])
+{
+   CLIENT *clnt;
+   double  *result_1, f;
+      char *endptr;
+      
+   f = strtod(argv[2],&endptr);
+        printf("value input  = %e\n",f);
+	//num = f;
+   clnt = clnt_create(host, SQRPROG, 
+	SQRVERS, "udp");
+   if (clnt == NULL) {
+      clnt_pcreateerror(host);
+      exit(1);
+   }
+   result_1 = square_1(&f, clnt);
+   
+   clnt_destroy( clnt );
+      printf("Square = %e\n",*result_1);
+}
+
+
+main( int argc, char* argv[] )
+{
+   char *host;
+
+   if(argc != 3){
+	printf("\n\nSorry invalid number of arguments");	
+	}
+
+   host = argv[1];
+   squareprog_1( host, argc, argv);
+}

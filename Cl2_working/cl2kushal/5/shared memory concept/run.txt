@@ -1,0 +1,20 @@
+http://simplestcodings.blogspot.com/2010/08/ipc-shared-memory-implementation-in-c.html
+
+Shared Memory is a type of IPC where the two processes share same memory chunk and use it for IPC. One process writes into that memory and other reads it.
+
+After running the Server you can see the attached Shared Memory
+
+vgupta80@linux unixprog> ipcs -m
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status
+0x0000162e 65537      vgupta80  666        27         1
+
+
+After running the client the memory is freed.
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status
+0x0000162e 65537      vgupta80  666        27         0
+
+

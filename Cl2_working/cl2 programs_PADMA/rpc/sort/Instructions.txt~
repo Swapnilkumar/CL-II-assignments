@@ -1,0 +1,48 @@
+Sort number program
+
+Steps for executing client and server program.
+
+
+1. Run rpcgen utility for avg.x
+
+   rpcgen sort.x
+
+2. Client and server stub files, xdr file and header file are created.
+
+   i.e sort_svc.c,sort_clnt.c,sort_xdr.c,sort.h
+
+3. Compile the client program by
+
+   cc client.c sort_clnt.c sort_xdr.c -o client
+
+4. Compile the server program by
+
+   cc server.c sort_svc.c sort_xdr.c -o server
+
+5. Run the server program first by
+
+   ./server
+
+6. Run the client program by
+
+   ./client 127.0.0.1 15 5  4 2 85 
+
+   Result will be displayed i.e. Sort  no
+
+
+Note : 127.0.0.1 is loopback address of the same machine where the client and server programs are running
+
+
+*Note: Client program can be on the any machines.
+
+  For that take the files related to client program
+
+  as client.c, avg_clnt.c,avg_xdr.c,avg.h 
+ 
+  and compile it as given in the step three and run it.
+
+   IP address is the one where the server program is running.
+
+
+
+

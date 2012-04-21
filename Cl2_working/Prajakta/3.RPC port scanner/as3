@@ -1,0 +1,179 @@
+/*	Assignment No.: 3
+	Roll No.: 4131
+	Title: Reading ports of remote machine	*/		                                   
+
+
+//server
+#include <rpc/rpc.h>
+#include "porth.h"
+#include <stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
+#include <netdb.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+
+out * getopenports_1(in * p1,CLIENT *client) {
+   out * output_struct;
+   int sockfd, port;
+    struct hostent *he;
+    int j=1;
+    output_struct = (out*) malloc(sizeof(out));
+
+    if ((he=gethostbyname(p1->host1)) == NULL)    // get the host info
+    {
+        perror("gethostbyname");
+  	exit(1);
+    }
+
+    printf("\n\nPort Number\tStatus");
+    for(port=p1->start; port<=p1->end; port++)
+    {
+
+        struct sockaddr_in their_addr; // connector's address information
+        if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+        {
+            perror("socket");
+            exit(1);
+        }
+
+        their_addr.sin_family = AF_INET;    // host byte order
+        their_addr.sin_port = htons(port);  // short, network byte order
+        their_addr.sin_addr = *((struct in_addr *)he->h_addr);
+        memset(&(their_addr.sin_zero), '\0', 8);  // zero the rest of the struct
+
+    if (connect(sockfd, (struct sockaddr *)&their_addr, sizeof(struct sockaddr)) == -1)
+        {
+            close(sockfd);
+        }
+        else
+        {
+            output_struct->port_no[j]=port;
+            printf("OPEN");
+            j++;
+            close(sockfd);
+        }
+    }
+    output_struct->tot = j-1;
+    return (output_struct);
+}
+
+	out *  getopenports_1_svc(in * p1,struct svc_req *svc) {
+  CLIENT *client;
+  return(getopenports_1(p1,client));
+}
+
+
+
+//client
+
+#include "porth.h"
+#include <stdlib.h>
+#include <string.h>
+
+void getports_1( char* host, int argc, char *argv[])
+{
+   CLIENT *clnt;
+   in  *input_struct;
+   out *output_struct;
+
+
+   int i,f;
+
+    input_struct = (in*) malloc(sizeof(in));
+
+
+    strcpy(input_struct->host1,argv[2]);
+    input_struct->start = atoi(argv[3]);
+    input_struct->end  = atoi(argv[4]);
+        printf("%s",input_struct->host1);
+   clnt = clnt_create(host, PORTPROG, PORTS, "udp");
+
+   if (clnt == NULL)
+   {
+      clnt_pcreateerror(host);
+      exit(1);
+   }
+
+   output_struct=getopenports_1(input_struct,clnt);
+
+
+   clnt_destroy( clnt );
+
+   printf("\n\nPorts which are opened on %s \n", input_struct->host1);
+
+   for(i=1;i<=output_struct->tot;i++)
+   {
+        printf("%d\n",output_struct->port_no[i]);
+   }
+
+}
+
+main( int argc, char* argv[] )
+{
+   char *host;
+
+   if(argc < 5) {
+     printf("usage: %s server_host remote_machine_ip start_port_value  end_port_value...\n",argv[0]);
+      exit(1);
+   }
+   host = argv[1];
+   getports_1( host, argc, argv);
+}
+
+
+
+//porth.x
+
+const PORTSLIMIT  = 50;
+
+struct inputstruct {
+        char host1[40];
+        int start;
+        int end;
+};
+
+
+struct outputstruct {
+
+        int tot;
+        int port_no[PORTSLIMIT];
+};
+
+
+typedef struct inputstruct in;
+
+typedef struct outputstruct out;
+
+program PORTPROG {
+    version PORTS {
+        out getopenports(in) = 1;
+    } = 1;
+} = 22855;
+
+
+
+
+/*	Output
+
+[oslab@ws203-026 port mapper]$ rpcgen porth.x 
+[oslab@ws203-026 port mapper]$ gcc server.c porth_svc.c porth_xdr.c -o server
+[root@ws203-026 port mapper]# ./server
+
+Port Number     StatusOPENOPENOPENOPEN
+
+
+[oslab@ws203-026 port mapper]$ rpcgen porth.x 
+[oslab@ws203-026 port mapper]$ gcc client.c porth_clnt.c porth_xdr.c -o client
+[oslab@ws203-026 port mapper]$./client 192.168.5.30 192.168.10.114 2 90
+192.168.10.114
+
+Ports which are opened on 192.168.10.114 
+21
+22
+53
+80					*/

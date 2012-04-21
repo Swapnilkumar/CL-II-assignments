@@ -1,0 +1,48 @@
+Average no. calculation program
+Steps for executing client and server program.
+
+
+1. Run rpcgen utility for avg.x
+
+   rpcgen avg.x
+
+2. Client and server stub files, xdr file and header file are created.
+
+   i.e avg_svc.c,avg_clnt.c,avg_xdr.c,avg.h
+
+3. Compile the client program by
+
+   cc client.c avg_clnt.c avg_xdr.c -o client
+
+4. Compile the server program by
+
+   cc server.c avg_svc. avg_xdr.c -o server
+
+5. Run the server program first by
+
+   ./server
+
+6. Run the client program by
+
+   ./client 127.0.0.1 2 3 4
+
+   Result will be displayed i.e. average no
+
+
+Note : 127.0.0.1 is loopback address of the same machine where the client and server programs are running
+
+
+*Note: Client program can be on the any machines.
+
+  For that take the files related to client program
+
+  as client.c, avg_clnt.c,avg_xdr.c,avg.h 
+ 
+  and compile it as given in the step three and run it.
+
+   IP address is the one where the server program is running.
+
+
+
+
+

@@ -1,0 +1,4 @@
+Linux 3.3.0-4.fc16.i686.PAE (localhost.localdomain) 	04/08/2012 	_i686_	(2 CPU)
+
+07:02:54 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest   %idle
+07:02:54 PM  all    3.74    0.05    1.17    1.72    0.13    0.08    0.00    0.00   93.11

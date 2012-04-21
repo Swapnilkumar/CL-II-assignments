@@ -1,0 +1,6 @@
+http://techtricks.co.in/programming/design-implementation-of-totally-ordered-multicast-using-lamport-logical-clockssynchronization
+
+
+http://www.cs.rice.edu/~druschel/comp413/lectures/algorithms.html
+
+

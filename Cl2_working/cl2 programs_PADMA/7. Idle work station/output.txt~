@@ -1,0 +1,26 @@
+
+
+//at slave node1  192.168.10.113
+
+[neeraj@localhost cpuusage]$ gcc idle_server.c idle_svc.c idle_xdr.c -o server
+[neeraj@localhost cpuusage]$ ./server 
+
+//-----------------------------------
+
+//at slave node2 192.168.10.114
+
+prajakta@ubuntu:~/cpuusage$ gcc idle_server.c idle_svc.c idle_xdr.c -o server
+prajakta@ubuntu:~/cpuusage$ ./server 
+
+//-----------------------------------
+
+//At master node
+
+[neeraj@localhost cpuusage]$ ./client 192.168.10.113 192.168.10.114
+CPU at IP = 192.168.10.113 is 93.11% free
+CPU at IP = 192.168.10.114 is 98.27% free
+Selecting the CPU at IP = 192.168.10.114
+Task performed from the server IP=192.168.10.114
+[neeraj@localhost cpuusage]$ 
+
+//-----------------------------------

@@ -1,0 +1,16 @@
+[oslab@ws203-016 3]$ ./a.out 192.168.5.20
+22 open
+53 open
+111 open
+4369 open
+5900 open
+8091 open
+11210 open
+11211 open
+21100 open
+39875 open
+40766 open
+50032 open
+53647 open
+[oslab@ws203-016 3]$ 
+

@@ -1,0 +1,14 @@
+http://docs.python.org/howto/sockets.html
+http://www.tidytutorials.com/2010/06/linux-c-socket-example-with-client.html
+http://people.cis.ksu.edu/~singh/CIS725/Fall99/programs/sock_ipc_tut.html
+http://www.paulgriffiths.net/program/c/echoserv.php
+http://youngindia99.com/ipc_linux_sockets.aspx
+http://osr507doc.sco.com/en/netguide/dusockN.unix_sockets_intro.html
+http://dev.chromium.org/developers/design-documents/inter-process-communication
+http://www.codeproject.com/KB/IP/serversocket.aspx
+http://www.cs.cf.ac.uk/Dave/C/node33.html
+http://www.cs.cornell.edu/info/projects/zeno/Tcl-DP/dp97/
+http://www.cprogramming.com/tutorial/rpc/remote_procedure_call_start.html
+http://osr507doc.sco.com/en/netguide/CONTENTS.html
+http://osr507doc.sco.com/en/netguide/disockD.code_samples.html
+

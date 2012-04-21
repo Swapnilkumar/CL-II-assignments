@@ -1,0 +1,8 @@
+A simple implementation of IPC Message Queues. 
+IPC_msgq_send.c adds the message on the message queue . 
+IPC_msgq_rcv.c removes the message from the message queue.
+
+To use this program first compile and run IPC_msgq_send.c to add a message to the message queue. To see the Message Queue type ipcs -q on your Unix/Linux Terminal.
+Now compile and run IPC_msgq_rcv.c to read the message from the Message Queue. 
+To see that you have read the message again use ipcs -q 
+
