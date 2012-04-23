@@ -1,0 +1,95 @@
+===Web service creation for simple calculator operations===
+
+Requirements :
+	1. gsoap < sudo apt-get install gsoap >
+	
+how to run it ?
+
+step 1:
+	(for gsoap version 2.X it is soapcpp2 else it is soapcpp)
+	soapcpp2 calc.h
+	--It will create stub and skeleton, and many required files
+	
+step 2:
+	---server code linking and compiling
+	
+	g++ -o service calc.cpp soapC.cpp soapServer.cpp -lgsoap++
+	
+	--service is the executable--server running on port 8000
+	--Run the server as
+	./service
+	
+step 3:
+	--client seeking for services of calculator
+	
+	--compile and link using creating <client> as executable
+	g++ -o client client.cpp soapC.cpp soapClient.cpp -lgsoap++
+	
+	--run the client as :
+	
+	./client
+	
+step 4:
+
+===============Do the Math :) ======================
+
+Function	Description
+soap_new()	Allocates and Initializes gSOAP context
+soap_init(struct soap *soap)	Initializes a stack-allocated gSOAP context (required once)
+soap_bind(struct soap *soap, char *host, int port, int backlog)	Returns master socket (backlog = max. queue size for requests). When host==NULL: host is the machine on which the service runs
+soap_accept(struct soap *soap)	Returns slave socket
+soap_end(struct soap *soap)	Clean up deserialized data (except class instances) and temporary data
+soap_free_temp(struct soap *soap)	Clean up temporary data only
+soap_destroy(struct soap *soap)	Clean up deserialized class instances (note: this function will be renamed with option -n
+soap_done(struct soap *soap)	Reset and detach context: close master/slave sockets and remove callbacks
+soap_free(struct soap *soap)	Detach and deallocate context (soap_new())
+
+
+The host name in soap_bind may be NULL to indicate that the current host should be used.
+The soap.accept_timeout attribute of the gSOAP runtime context specifies the timeout value for a non-blocking soap_accept(&soap) call. See Section 19.19 for more details on timeout management.
+See Section 9.13 for more details on memory management.
+A client application connects to this stand-alone service with the endpoint machine.genivia.com:18083. A client may use the http:// prefix. When absent, no HTTP header is sent and no HTTP-based information will be communicated to the service.
+
+
+soapStub.h
+An annotated copy of calc.h with additional stub/skeleton function declarations
+
+soapH.h
+Header file definitions of the gSOAP-generated functions. This header file should be included in your application
+
+soapC.cpp
+Serializers and deserializers for C/C++ data structures for SOAP/XML parameter marshalling
+
+soapClient.cpp
+Client-side stub routines for SOAP/XML remote procedure calling
+
+soapServer.cpp
+Server-side skeleton routines for SOAP/XML request handling
+
+calc.wsdl
+A WSDL document describing your service
+
+calc.nsmap
+A namespace mapping table to be included in your client/service application
+
+soapcalcProxy.h
+A client proxy class to invoke the remote service from a C++ application
+
+calc.add.req.xml
+Sample SOAP/XML 'add' client request message
+
+calc.add.res.xml
+Sample SOAP/XML 'add' service response message
+
+calc.sub.req.xml
+Sample SOAP/XML 'sub' client request message
+
+calc.sub.res.xml
+Sample SOAP/XML 'sub' service response message
+
+calc.sqrt.req.xml
+Sample SOAP/XML 'sqrt' client request message
+
+calc.sqrt.res.xml
+Sample SOAP/XML 'sqrt' service response message
+
